@@ -175,7 +175,7 @@ app.post('/insertar', async (req, res) => {
 
         const { nombre,contraseña} = req.body;
 
-        const [rows, fields] = await conn.execute('INSERT INTO usuario (Nombre,Contraseña) VALUES (?, ?)', [nombre,contraseña]);
+        const [rows, fields] = await conn.execute('INSERT INTO usuario (Nombre,Contrasena) VALUES (?, ?)', [nombre,contraseña]);
 
         res.json({ message: 'Datos insertados correctamente de '+nombre });
     } catch (error) {
@@ -233,7 +233,7 @@ app.put("/usuario/:Tipo", async (req, res) => {
         const conn = await mysql.createConnection(MySqlConnection);
         const { Nombre,Contraseña } = req.body;
         console.log(req.body);
-        await conn.query('UPDATE usuario SET Nombre = ?, Contraseña = ? WHERE Tipo = ?', [Nombre,Contraseña,req.params.Tipo]);
+        await conn.query('UPDATE usuario SET Nombre = ?, Contrasena = ? WHERE Tipo = ?', [Nombre,Contraseña,req.params.Tipo]);
         res.json({ mensaje: "ACTUALIZADO"+Nombre });
     } catch (err) {
         res.status(500).json({ mensaje: err.sqlMessage });
